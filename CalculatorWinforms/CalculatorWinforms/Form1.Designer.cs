@@ -1,6 +1,6 @@
-﻿namespace Calculator_winforms
+﻿namespace CalculatorWinforms
 {
-    partial class UserControl1
+    partial class Form1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -20,7 +20,7 @@
             base.Dispose(disposing);
         }
 
-        #region 组件设计器生成的代码
+        #region Windows 窗体设计器生成的代码
 
         /// <summary>
         /// 设计器支持所需的方法 - 不要修改
@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "Form1";
         }
 
         #endregion
     }
 }
+

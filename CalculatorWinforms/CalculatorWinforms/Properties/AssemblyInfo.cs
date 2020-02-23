@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Calculator_winforms")]
+[assembly: AssemblyTitle("CalculatorWinforms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Calculator_winforms")]
+[assembly: AssemblyProduct("CalculatorWinforms")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("be4c8993-15e1-478d-87ff-2d760d22e0c9")]
+[assembly: Guid("566bda86-70a7-4787-b58c-5766f132c41b")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
