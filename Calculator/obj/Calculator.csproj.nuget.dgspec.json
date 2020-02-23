@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Platanus\\Desktop\\Calculator\\Calculator.csproj": {}
+    "D:\\Github\\ForCSharp\\Calculator\\Calculator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Platanus\\Desktop\\Calculator\\Calculator.csproj": {
+    "D:\\Github\\ForCSharp\\Calculator\\Calculator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Platanus\\Desktop\\Calculator\\Calculator.csproj",
+        "projectUniqueName": "D:\\Github\\ForCSharp\\Calculator\\Calculator.csproj",
         "projectName": "Calculator",
-        "projectPath": "C:\\Users\\Platanus\\Desktop\\Calculator\\Calculator.csproj",
+        "projectPath": "D:\\Github\\ForCSharp\\Calculator\\Calculator.csproj",
         "packagesPath": "C:\\Users\\Platanus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Platanus\\Desktop\\Calculator\\obj\\",
+        "outputPath": "D:\\Github\\ForCSharp\\Calculator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Microsoft\\Xamarin\\NuGet\\",

@@ -7,23 +7,36 @@ namespace Calculator
         static void Main(string[] args)
         {
             while(true){
+                
+                try
+                {
+                                  
+                }
+                catch (System.Exception)
+                {
+                    
+                    throw;
+                }
                 Console.WriteLine("请输入第一个数:\n>");
                 string str1 = Console.ReadLine();
                 check(str1);
-                Double num1 = Double.Parse(str1);
-
-                Console.WriteLine("请输入第二个数:\n>");
-                string str2 = Console.ReadLine();
-                Double num2 = Double.Parse(str2);
+                Double num1 = Double.Parse(str1);  
+               
 
                 Console.WriteLine("请输入运算符:\n>");
                 string str3 = Console.ReadLine();
+                
+                Console.WriteLine("请输入第二个数:\n>");
+                string str2 = Console.ReadLine();
+                Double num2 = Double.Parse(str2);
 
                 double result =0;
 
                 calculate(num1,num2,str3,ref result);
 
-                Console.WriteLine(str1+str3+str2+" = "+result.ToString());
+                Console.WriteLine("{0} {1} {2} = {3}",str1,str3,str2,result);
+
+                Console.ReadKey();
             }
         }
 
