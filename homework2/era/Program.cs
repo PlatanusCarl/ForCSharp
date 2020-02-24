@@ -6,11 +6,31 @@ using System;
 
 namespace era
 {
-    class Program
+    class Program   
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("请输入整数n：\n");
+            int n;
+            while(!int.TryParse(Console.ReadLine(),out n))
+            {
+                Console.WriteLine("输入有误，请重新输入");
+            }
+            bool[] tagArray = new bool[(int)System.Math.Sqrt(n)];
+
+            for(int i = 2;i<tagArray.Length;i++)
+            {
+                if(!tagArray[i])
+                {
+                    Console.WriteLine(i);
+                }
+                for(int j =2*i;j<tagArray.Length;j+=i)
+                {
+                    tagArray[j] = true;
+                }
+            }
+
+            Console.ReadKey();
         }
     }
 }
