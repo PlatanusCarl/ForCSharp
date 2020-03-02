@@ -6,33 +6,25 @@ namespace geometryClass
 {
     class Circle:Shape
     {
-        public Circle(int a)
+        public Circle(double a)
         {
-            radius = a;
-            tag = this.IsLegal();
+            Radius = a;
         }
-        public void Reset(int a)
+        public double Radius { set; get; }
+        public override double? Area
         {
-            radius = a;
-            tag = this.IsLegal();
-        }
-        public override double? GetArea()
-        {
-            if (tag == true)
+            get
             {
-                area = 3.14 * radius * radius;
-                return area;
+                if(this.IsLegal())
+                    return 3.14 * Radius * Radius;
+                Console.WriteLine("非法圆形！");
+                return null;
             }
-            Console.WriteLine("圆形非法");
-            return null;
         }
         public override bool IsLegal()
         {
-            if (radius < 0) return false;
+            if (Radius < 0) return false;
             return true;
         }
-
-        private int radius;
-        private bool? tag = null;
     }
 }

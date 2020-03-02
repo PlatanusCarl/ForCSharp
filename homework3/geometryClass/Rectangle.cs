@@ -6,33 +6,30 @@ namespace geometryClass
 {
     class Rectangle:Shape
     {
-        private int height,width;
-        private bool? tag = null;
+        public double Length { set; get; }
+        public double Width { set; get; }
+
         public Rectangle(int a, int b)
         {
-            height = a;
-            width = b;
-            tag = this.IsLegal();
+            Length = a;
+            Width = b;
         }
-        public void Reset(int a, int b)
+
+        public override double? Area
         {
-            height = a;
-            width = b;
-            tag = this.IsLegal();
-        }
-        public override double? GetArea()
-        {
-            if (tag == true)
+            get
             {
-                area = height * width;
-                return area;
+                if(this.IsLegal())
+                {
+                    return Length * Width;
+                }
+                Console.WriteLine("矩形非法");
+                return null;
             }
-            Console.WriteLine("矩形非法");
-            return null;
         }
         public override bool IsLegal()
         {
-            if (height < 0 || width < 0) return false;
+            if (Length < 0 || Width < 0) return false;
             return true;
         }
     }

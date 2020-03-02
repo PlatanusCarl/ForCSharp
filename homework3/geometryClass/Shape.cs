@@ -6,11 +6,8 @@ namespace geometryClass
 {
     abstract class Shape
     {
-        ~Shape() { }
-        public abstract double? GetArea();
+        public abstract double? Area { get; }
         public abstract bool IsLegal();
-      //  public abstract void Reset();
 
-        protected double? area;
     }
 }
