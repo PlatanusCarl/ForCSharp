@@ -4,10 +4,8 @@ using System.Text;
 
 namespace GeometryShapes
 {
-    abstract class Shape
+    class Factory
     {
-        public abstract double? Area { get; }
-        public abstract bool IsLegal();
 
     }
 }
