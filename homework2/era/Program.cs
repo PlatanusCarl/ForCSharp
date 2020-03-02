@@ -24,7 +24,7 @@ namespace era
                 {
                     Console.WriteLine(i);
                 }
-                for(int j =2*i;j<tagArray.Length;j+=i)
+                for(int j =i+i;j<tagArray.Length;j+=i)
                 {
                     tagArray[j] = true;
                 }
