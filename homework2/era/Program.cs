@@ -16,20 +16,22 @@ namespace era
             {
                 Console.WriteLine("输入有误，请重新输入");
             }
-            bool[] tagArray = new bool[(int)System.Math.Sqrt(n)];
+            bool[] tagArray = new bool[n];
 
-            for(int i = 2;i<tagArray.Length;i++)
+            for(int i = 2;i<(int)System.Math.Sqrt(n)+1;i++)
             {
-                if(!tagArray[i])
-                {
-                    Console.WriteLine(i);
-                }
-                for(int j =i+i;j<tagArray.Length;j+=i)
+                for(int j =2*i;j<tagArray.Length;j+=i)
                 {
                     tagArray[j] = true;
                 }
             }
 
+            for(int m = 2;m<tagArray.Length;m++)
+            {
+                if(!tagArray[m])
+                    Console.WriteLine(m);
+            }   
+            
             Console.ReadKey();
         }
     }
