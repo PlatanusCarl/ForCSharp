@@ -15,107 +15,109 @@ using System.Linq;
 
 namespace OrderManagementSystem
 {
-    class Order
-    {
-        Order(int orderID,String costumer)
-        {
-            this.Customer = costumer;
-            this.ID = orderID;
+   class Order
+   {
+       Order(int orderID,String costumer)
+       {
+           this.Customer = costumer;
+           this.ID = orderID;
 
-        }
-        public int ID { set; get; }
-        public String Customer { set; get; }
-        public int Total { set; get; }
-               
-        public List<OrderItem> itemList;
+       }
+       public int ID { set; get; }
+       public String Customer { set; get; }
+       public int Total { set; get; }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-        public override bool Equals(object obj)
-        {
-            if()
-            return 
-        }
-    }
+       public List<OrderItem> itemList;
 
-    class OrderItem
-    { 
-        OrderItem(int id,int price )
-        {
-            this.ID = id;
-            this.Price = price;
-        }
-        public int ID { set; get; }
-        public int Price { set; get; }
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-    }
+       public override string ToString()
+       {
+           return base.ToString();
+       }
+       public bool Equals(Order obj)
+       {
+           if (obj.ID != this.ID)
+               return false;
+           return true; 
+       }
+   }
 
-    class OrderService
-    {
-        private List<Order> orderList;
-        public void addOrder(Order theOne)
-        {
-            this.orderList.Add(theOne);
-            this.sortOrder();
-        }
+   class OrderItem
+   { 
+       OrderItem(int id,int price )
+       {
+           this.ID = id;
+           this.Price = price;
+       }
+       public int ID { set; get; }
+       public int Price { set; get; }
+       public override string ToString()
+       {
+           return base.ToString();
+       }
+   }
 
-        public void deleteOrder(Order theOne)
-        {
-            var query = from o in this.orderList
-                        where o 
-        }
+   class OrderService
+   {
+       private List<Order> orderList;
+       public void addOrder(Order theOne)
+       {
+           this.orderList.Add(theOne);
+           this.sortOrder();
+       }
 
-        public void editOrder(Order theOne)
-        {
+       public void deleteOrder(Order theOne)
+       {
+           var query = from o in this.orderList
+                       where o 
+       }
 
-        }
+       public void editOrder(Order theOne)
+       {
 
-        public Order searchOrder(int id)
-        {
-            var query = from o in this.orderList
-                        where o.ID == id
-                        select o;
-            var result = query.FirstOrDefault<Order>();
+       }
 
-            if (result == null)
-            {
-                Console.WriteLine("查询订单不存在！");
-                return result;
-            }
-            return result;
-        }
-        public Order searchOrder(string customer)
-        {
-            var query = from o in this.orderList
-                        where o.Customer == customer
-                        select o;
-            var result = query.FirstOrDefault<Order>();
-            
-            if (result == null)
-            {
-                Console.WriteLine("查询订单不存在！");
-                return result;
-            }
-            return result;
-        }
+       public Order searchOrder(int id)
+       {
+           var query = from o in this.orderList
+                       where o.ID == id
+                       orderby o.Total
+                       select o;
+           var result = query.FirstOrDefault<Order>();
 
-        public void sortOrder()
-        {
+           if (result == null)
+           {
+               Console.WriteLine("查询订单不存在！");
+               return result;
+           }
+           return result;
+       }
+       public Order searchOrder(string customer)
+       {
+           var query = from o in this.orderList
+                       where o.Customer == customer
+                       select o;
+           var result = query.FirstOrDefault<Order>();
 
-        }
-    }
+           if (result == null)
+           {
+               Console.WriteLine("查询订单不存在！");
+               return result;
+           }
+           return result;
+       }
+
+       public void sortOrder()
+       {
+
+       }
+   }
 
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
+   class Program
+   {
+       static void Main(string[] args)
+       {
+           Console.WriteLine("Hello World!");
+       }
+   }
 }
