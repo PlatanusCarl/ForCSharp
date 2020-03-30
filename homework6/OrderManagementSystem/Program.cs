@@ -11,7 +11,7 @@ using System.IO;
 
 namespace OrderManagementSystem
 {
-    class mList<order> : List<Order>
+    public class mList<order> : List<Order>
     {
         public override string ToString()
         {
@@ -21,7 +21,7 @@ namespace OrderManagementSystem
             return $"{s}";
         }
     }
-    class mArrayList : ArrayList
+    public class mArrayList : ArrayList
     {
         public override string ToString()
         {
@@ -32,7 +32,7 @@ namespace OrderManagementSystem
         }
     }
     [Serializable]
-    class Order
+    public class Order
     {
         public Order()
         {
@@ -72,7 +72,7 @@ namespace OrderManagementSystem
         }
     }
 
-    class OrderItem
+    public class OrderItem
     {
         OrderItem(int id, int price,int amount)
         {
@@ -102,7 +102,7 @@ namespace OrderManagementSystem
         }
     }
 
-    class OrderService
+    public class OrderService
     {
         private mList<Order> orderList;
         public void addOrder(Order theOne)
@@ -177,11 +177,22 @@ namespace OrderManagementSystem
 
         public List<Order> searchOrder(OrderItem theOne)
         {
-            return;
+            var query = from o in this.orderList
+                        where o.itemList.Contains(theOne)
+                        orderby o.ID
+                        select o;
+            List<Order> result = query.ToList();
+            return result;
         }
         public void sortOrder()
         {
-
+            orderList.Sort((left, right) =>
+            {
+                if (left.ID >= right.ID)
+                    return 1;
+                else
+                    return 0;
+            });
         }
     
         public void Export(string path)
@@ -198,9 +209,13 @@ namespace OrderManagementSystem
             XmlSerializer xmlserializer = new XmlSerializer(typeof(mList<Order>));
             using(FileStream importStream = new FileStream(path, FileMode.Open))
             {
-
+                mList<Order> temp = (mList<Order>)xmlserializer.Deserialize(importStream);
+                temp.ForEach(o =>
+                {
+                    if (!orderList.Contains(o))
+                        orderList.Add(o);
+                });
             }
-
         }
     }
 
