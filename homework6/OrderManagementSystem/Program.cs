@@ -74,7 +74,7 @@ namespace OrderManagementSystem
 
     public class OrderItem
     {
-        OrderItem(int id, int price,int amount)
+        public OrderItem(int id, int price,int amount)
         {
             this.ID = id;
             this.Price = price;

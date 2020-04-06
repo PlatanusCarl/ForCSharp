@@ -9,6 +9,18 @@ namespace OrderManagementSystem.Tests
     [TestClass()]
     public class OrderServiceTests
     {
+        OrderService orderService = new OrderService();
+
+        OrderItem item1 = new OrderItem(1, 10, 1);
+        OrderItem item2 = new OrderItem(2, 5, 10);
+        OrderItem item3 = new OrderItem(3, 15, 100);
+
+        [TestInitialize]
+        public void init()
+        {
+
+        }
+
         [TestMethod()]
         public void addOrderTest()
         {
