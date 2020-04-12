@@ -23,5 +23,10 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
     }
 }

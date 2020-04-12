@@ -21,16 +21,28 @@ namespace OrderManagementSystem
             return $"{s}";
         }
     }
-    public class mArrayList : ArrayList
+
+    public class nlist<orderitem> : List<OrderItem>
     {
         public override string ToString()
         {
             string s = "\n";
             int count = 1;
-            Array.ForEach(this.ToArray(), i => s +=(count++)+"."+ i.ToString() + "\n");
+            Array.ForEach(this.ToArray(), i => s += (count++) + "." + i.ToString() + "\n");
             return $"{s}";
         }
+
+        public bool Contains(OrderItem item)
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (this[i].Equals(item))
+                    return true;
+            }
+            return false;
+        }
     }
+
     [Serializable]
     public class Order
     {
@@ -38,14 +50,26 @@ namespace OrderManagementSystem
         {
             ID = 0;
             Customer = "";
+            itemList = new nlist<OrderItem>();
         }
         public Order(int orderID, String costumer)
         {
             this.Customer = costumer;
             this.ID = orderID;
         }
-        public int ID {get; }
-        public String Customer {get; }
+        
+        public Order(int orderID, string costumer, nlist<OrderItem> list)
+        {
+            this.Customer = costumer;
+            this.ID = orderID;
+            this.itemList = new nlist<OrderItem>();
+            foreach(object o in list)
+            {
+                this.itemList.Add(o as OrderItem);
+            }
+        }
+        public int ID { set; get; }
+        public String Customer { set; get; }
         public int Total { 
             get
             {
@@ -58,7 +82,7 @@ namespace OrderManagementSystem
             }
         }
 
-        public mArrayList itemList { get; }
+        public nlist<OrderItem> itemList;
 
         public override string ToString()
         {
@@ -72,30 +96,25 @@ namespace OrderManagementSystem
         }
     }
 
+    [Serializable]
     public class OrderItem
     {
+        public OrderItem()
+        {
+            ID = 0;
+            Price = 0;
+            Amount = 0;
+        }
         public OrderItem(int id, int price,int amount)
         {
             this.ID = id;
             this.Price = price;
             this.Amount = amount;
         }
-        OrderItem()
-        {
-            ID = 0;
-            Price = 0;
-            Amount = 0;
-        }
         public int ID { set; get; }
         public int Price { set; get; }
         public int Amount { set; get; }
-        public int Total
-        {
-            get
-            {
-                return Price * Amount;
-            }
-        }
+        public int Total => Price * Amount;
         public override string ToString()
         {
             return $"商品号：{ID}，商品价格：{Price}，商品数量：{Amount}";
@@ -104,7 +123,12 @@ namespace OrderManagementSystem
 
     public class OrderService
     {
-        private mList<Order> orderList;
+        public mList<Order> orderList;
+
+        public OrderService()
+        {
+            orderList = new mList<Order>();
+        }
         public void addOrder(Order theOne)
         {
             foreach(Order o in orderList)
@@ -148,7 +172,6 @@ namespace OrderManagementSystem
         {
             var query = from o in this.orderList
                         where o.ID == id
-                        orderby o.Total
                         select o;
             var result = query.FirstOrDefault<Order>();
 
@@ -163,7 +186,6 @@ namespace OrderManagementSystem
         {
             var query = from o in this.orderList
                         where o.Customer == customer
-                        orderby o.ID
                         select o;
             var result = query.FirstOrDefault<Order>();
 
@@ -179,9 +201,8 @@ namespace OrderManagementSystem
         {
             var query = from o in this.orderList
                         where o.itemList.Contains(theOne)
-                        orderby o.ID
                         select o;
-            List<Order> result = query.ToList();
+            List<Order> result = query.ToList() as List<Order>;
             return result;
         }
         public void sortOrder()
@@ -200,7 +221,7 @@ namespace OrderManagementSystem
             XmlSerializer xmlserializer = new XmlSerializer(typeof(mList<Order>));
             using(FileStream exportStream = new FileStream(path, FileMode.Create))
             {
-                xmlserializer.Serialize(exportStream, orderList);
+                xmlserializer.Serialize(exportStream, this.orderList);
             }
         }
 
