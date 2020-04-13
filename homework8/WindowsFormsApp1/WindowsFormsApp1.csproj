@@ -66,6 +66,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\Form1.datasource" />
+    <None Include="Properties\DataSources\OrderManagementSystem.Order.datasource" />
+    <None Include="Properties\DataSources\OrderManagementSystem.OrderItem.datasource" />
+    <None Include="Properties\DataSources\OrderManagementSystem.OrderService.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\WindowsFormsApp1.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\WindowsFormsApp1.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -78,6 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\oderManagementSystem\oderManagementSystem.csproj">
+      <Project>{5235e5b5-bca0-4639-b05f-7bd941854e8b}</Project>
+      <Name>oderManagementSystem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
