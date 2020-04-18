@@ -79,7 +79,7 @@
                 }
             }
 
-            public nlist<OrderItem> itemList;
+            public nlist<OrderItem> itemList { set; get; }
 
             public override string ToString()
             {
