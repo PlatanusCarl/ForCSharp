@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OrderManagementSystem;
 /*
  * 为订单管理的程序添加一个WinForm的界面。通过这个界面，调用OrderService的各个方法，实现创建订单、删除订单、修改订单、查询订单、导出订单、导入订单等功能。
  * 要求：
@@ -19,11 +20,13 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        OrderManagementSystem.OrderService service = new OrderManagementSystem.OrderService();
+        OrderManagementSystem.OrderService service;
         public Form1()
         {
             InitializeComponent();
-            this.dataGridView1.DataSource = service.orderList;
+            service = new OrderManagementSystem.OrderService();
+
+            dataGridView1.DataSource = service.orderList;
         }
 
         private void querybtn_Click(object sender, EventArgs e)
@@ -31,12 +34,21 @@ namespace WindowsFormsApp1
 
         }
 
+        Order addorder;
+
+        public void add(Order order)
+        {
+            addorder = order;
+        }
+
         private void creatbtn_Click(object sender, EventArgs e)
         {
             creatForm form = new creatForm();
             if(DialogResult.OK == form.ShowDialog())
             {
-                service.addOrder(form.order);
+                service.addOrder(addorder);
+                dataGridView1.DataSource = new mList<Order>();
+                dataGridView1.DataSource = service.orderList;
             }
         }
 
@@ -53,7 +65,12 @@ namespace WindowsFormsApp1
         private void exportbtn_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFile = new SaveFileDialog();
-
+            saveFile.Title = "请选择导出路径";
+            saveFile.Filter = "XML文件|*.xml";
+            if (DialogResult.OK == saveFile.ShowDialog())
+            {
+                service.Export(saveFile.FileName);
+            }
         }
 
         private void importbtn_Click(object sender, EventArgs e)
@@ -65,6 +82,11 @@ namespace WindowsFormsApp1
             {
                 service.Import(openFile.FileName);
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

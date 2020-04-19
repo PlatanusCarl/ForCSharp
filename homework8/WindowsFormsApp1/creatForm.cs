@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OrderManagementSystem;
 
 namespace WindowsFormsApp1
 {
     public partial class creatForm : Form
     {
+        public delegate void mydel(Order order);
+
+        mydel _dele;
+
         public OrderManagementSystem.Order order { set; get; }
 
         OrderManagementSystem.OrderItem item;
@@ -30,20 +35,27 @@ namespace WindowsFormsApp1
 
         private void addItembtn_Click(object sender, EventArgs e)
         {
-            OrderManagementSystem.OrderItem additem = new OrderManagementSystem.OrderItem();
-            additem.ID = item.ID;
-            additem.Price = item.Price;
-            additem.Amount = item.Amount;
-            if(order.itemList.Contains(additem))
+            OrderItem aitem = new OrderItem(item.ID, item.Price, item.Amount);
+            for (int i = 0; i < order.itemList.Count; i++)
             {
-
+                if (order.itemList[i].ID == aitem.ID)
+                {
+                    order.itemList[i] = aitem;
+                
+                    dataGridView1.DataSource = new nlist<OrderItem>();
+                    dataGridView1.DataSource = order.itemList;
+                    return;
+                }
             }
-            order.itemList.Add(additem);
+            order.itemList.Add(aitem);
+            
+            dataGridView1.DataSource = new nlist<OrderItem>();
+            dataGridView1.DataSource = order.itemList;
         }
 
-        private void creatForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void OKbtn_Click(object sender, EventArgs e)
         {
-         
+            order.Customer = customertxt.Text;
         }
     }
 }

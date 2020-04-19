@@ -47,7 +47,7 @@
                 ID = 0;
                 Customer = "";
                 itemList = new nlist<OrderItem>();
-                creatTime = DateTime.Now;
+                CreatTime = DateTime.Now;
             }
             public Order(int orderID, String costumer):this()
             {
@@ -66,7 +66,7 @@
                 }
             }
 
-            public DateTime creatTime { set; get; }
+            public DateTime CreatTime { set; get; }
 
             public int ID { set; get; }
             public String Customer { set; get; }
