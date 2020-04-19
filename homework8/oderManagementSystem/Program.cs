@@ -47,14 +47,15 @@
                 ID = 0;
                 Customer = "";
                 itemList = new nlist<OrderItem>();
+                creatTime = DateTime.Now;
             }
-            public Order(int orderID, String costumer)
+            public Order(int orderID, String costumer):this()
             {
                 this.Customer = costumer;
                 this.ID = orderID;
             }
 
-            public Order(int orderID, string costumer, nlist<OrderItem> list)
+            public Order(int orderID, string costumer, nlist<OrderItem> list):this()
             {
                 this.Customer = costumer;
                 this.ID = orderID;
@@ -64,6 +65,9 @@
                     this.itemList.Add(o as OrderItem);
                 }
             }
+
+            public DateTime creatTime { set; get; }
+
             public int ID { set; get; }
             public String Customer { set; get; }
             public int Total
@@ -116,9 +120,16 @@
             {
                 return $"商品号：{ID}，商品价格：{Price}，商品数量：{Amount}";
             }
-        }
+            public bool Equals(Order obj)
+            {
+            if (obj.ID != this.ID)
+                return false;
+            return true;
+            }
+        
+    }
 
-        public class OrderService
+    public class OrderService
         {
             public mList<Order> orderList;
 
@@ -126,21 +137,22 @@
             {
                 orderList = new mList<Order>();
             }
-            public void addOrder(Order theOne)
+        public void addOrder(Order theOne)
+        {
+            if (orderList.Count == 0)
+                return;
+            foreach (Order o in orderList)
             {
-                foreach (Order o in orderList)
+                if (o.Equals(theOne))
                 {
-                    if (o.Equals(theOne))
-                    {
-                        Console.WriteLine("订单已存在！");
-                        return;
-                    }
+                    Console.WriteLine("订单已存在！");
+                    return;
                 }
-                this.orderList.Add(theOne);
-                this.sortOrder();
             }
-
-            public bool deleteOrder(Order theOne)
+            this.orderList.Add(theOne);
+            this.sortOrder();
+        }
+        public bool deleteOrder(Order theOne)
             {
                 for (int i = 0; i < this.orderList.Count; i++)
                 {

@@ -19,19 +19,52 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        OrderManagementSystem.OrderService service = new OrderManagementSystem.OrderService();
         public Form1()
         {
             InitializeComponent();
+            this.dataGridView1.DataSource = service.orderList;
         }
 
-        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        private void querybtn_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void creatbtn_Click(object sender, EventArgs e)
+        {
+            creatForm form = new creatForm();
+            if(DialogResult.OK == form.ShowDialog())
+            {
+                service.addOrder(form.order);
+            }
+        }
+
+        private void deletebtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void editbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exportbtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+
+        }
+
+        private void importbtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Title = "请选择导入的XML文件";
+            openFile.Filter = "XML文件|*.xml";
+            if(DialogResult.OK  == openFile.ShowDialog())
+            {
+                service.Import(openFile.FileName);
+            }
         }
     }
 }
