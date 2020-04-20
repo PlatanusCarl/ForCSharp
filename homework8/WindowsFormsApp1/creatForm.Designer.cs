@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
             this.OKbtn = new System.Windows.Forms.Button();
+            this.deletbtn = new System.Windows.Forms.Button();
             this.addItembtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customertxt = new System.Windows.Forms.TextBox();
@@ -41,12 +42,11 @@
             this.goodsIDlbl = new System.Windows.Forms.Label();
             this.goodsIDtxt = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.orderItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deletbtn = new System.Windows.Forms.Button();
+            this.orderItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderItemBindingSource)).BeginInit();
@@ -83,6 +83,17 @@
             this.OKbtn.Text = "确定创建";
             this.OKbtn.UseVisualStyleBackColor = true;
             this.OKbtn.Click += new System.EventHandler(this.OKbtn_Click);
+            // 
+            // deletbtn
+            // 
+            this.deletbtn.Location = new System.Drawing.Point(573, 14);
+            this.deletbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deletbtn.Name = "deletbtn";
+            this.deletbtn.Size = new System.Drawing.Size(91, 25);
+            this.deletbtn.TabIndex = 10;
+            this.deletbtn.Text = "删除商品";
+            this.deletbtn.UseVisualStyleBackColor = true;
+            this.deletbtn.Click += new System.EventHandler(this.deletbtn_Click);
             // 
             // addItembtn
             // 
@@ -165,6 +176,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -183,10 +195,6 @@
             this.dataGridView1.RowTemplate.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(676, 350);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // orderItemBindingSource
-            // 
-            this.orderItemBindingSource.DataSource = typeof(OrderManagementSystem.OrderItem);
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -217,16 +225,9 @@
             this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
             this.totalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // deletbtn
+            // orderItemBindingSource
             // 
-            this.deletbtn.Location = new System.Drawing.Point(573, 14);
-            this.deletbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.deletbtn.Name = "deletbtn";
-            this.deletbtn.Size = new System.Drawing.Size(91, 25);
-            this.deletbtn.TabIndex = 10;
-            this.deletbtn.Text = "删除商品";
-            this.deletbtn.UseVisualStyleBackColor = true;
-            this.deletbtn.Click += new System.EventHandler(this.deletbtn_Click);
+            this.orderItemBindingSource.DataSource = typeof(OrderManagementSystem.OrderItem);
             // 
             // creatForm
             // 
