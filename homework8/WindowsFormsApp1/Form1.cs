@@ -33,22 +33,24 @@ namespace WindowsFormsApp1
         {
 
         }
-
-        Order addorder;
-
-        public void add(Order order)
-        {
-            addorder = order;
-        }
-
         private void creatbtn_Click(object sender, EventArgs e)
         {
-            creatForm form = new creatForm();
-            if(DialogResult.OK == form.ShowDialog())
+            int lastrow = dataGridView1.Rows.GetLastRow(DataGridViewElementStates.None);
+            int orderID = 0;
+            if (lastrow >= 0)
             {
-                service.addOrder(addorder);
+                int? ID = dataGridView1.Rows[lastrow].Cells[0].Value as int?;
+                if (ID != null)
+                    orderID = (int)ID+1;
+            }
+            creatForm form = new creatForm(orderID);
+
+            if (DialogResult.OK == form.ShowDialog())
+            {
+                service.addOrder(form.order);
                 dataGridView1.DataSource = new mList<Order>();
                 dataGridView1.DataSource = service.orderList;
+                form.Dispose();
             }
         }
 
@@ -81,6 +83,8 @@ namespace WindowsFormsApp1
             if(DialogResult.OK  == openFile.ShowDialog())
             {
                 service.Import(openFile.FileName);
+                dataGridView1.DataSource = new mList<Order>();
+                dataGridView1.DataSource = service.orderList;
             }
         }
 

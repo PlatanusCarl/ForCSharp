@@ -49,6 +49,11 @@
                 itemList = new nlist<OrderItem>();
                 CreatTime = DateTime.Now;
             }
+
+            public Order(int ID) : this()
+        {
+            this.ID = ID;
+        }
             public Order(int orderID, String costumer):this()
             {
                 this.Customer = costumer;
@@ -140,8 +145,11 @@
         public void addOrder(Order theOne)
         {
             if (orderList.Count == 0)
+            {
+                this.orderList.Add(theOne);
                 return;
-            foreach (Order o in orderList)
+            }
+                foreach (Order o in orderList)
             {
                 if (o.Equals(theOne))
                 {
