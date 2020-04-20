@@ -244,6 +244,7 @@
 
             public void Import(string path)
             {
+                this.orderList.Clear();
                 XmlSerializer xmlserializer = new XmlSerializer(typeof(mList<Order>));
                 using (FileStream importStream = new FileStream(path, FileMode.Open))
                 {

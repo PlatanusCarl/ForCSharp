@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,56 +11,51 @@ using OrderManagementSystem;
 
 namespace WindowsFormsApp1
 {
-    public partial class creatForm : Form
+    public partial class editForm : Form
     {
-        public OrderManagementSystem.Order order { set; get; }
-
+        Order order;
         OrderManagementSystem.OrderItem item;
-        public creatForm()
+
+        public editForm()
         {
             InitializeComponent();
-            order = new OrderManagementSystem.Order();
-
-            dataGridView1.DataSource = order.itemList;
-
+            order = new Order();
             item = new OrderManagementSystem.OrderItem();
             goodsIDtxt.DataBindings.Add("Text", item, "ID");
             goodsPricetxt.DataBindings.Add("Text", item, "Price");
             goodsAmountxt.DataBindings.Add("Text", item, "Amount");
         }
 
-        public creatForm(int ID):this()
+        public editForm(Order order):this()
         {
-            order = new Order(ID);
+            this.order = order;
+            orderItemBindingSource.DataSource = order.itemList;
+        }
+
+        private void OKbtn_Click(object sender, EventArgs e)
+        {
+            order.Customer = customertxt.Text;
         }
 
         private void addItembtn_Click(object sender, EventArgs e)
         {
-            if(item.Amount == 0)
+            if (item.Amount == 0)
                 return;
 
             OrderItem aitem = new OrderItem(item.ID, item.Price, item.Amount);
-           
+
             for (int i = 0; i < order.itemList.Count; i++)
             {
                 if (order.itemList[i].ID == aitem.ID)
                 {
                     order.itemList[i] = aitem;
-                
+
                     dataGridView1.DataSource = new nlist<OrderItem>();
                     dataGridView1.DataSource = order.itemList;
                     return;
                 }
             }
             order.itemList.Add(aitem);
-            
-            dataGridView1.DataSource = new nlist<OrderItem>();
-            dataGridView1.DataSource = order.itemList;
-        }
-
-        private void OKbtn_Click(object sender, EventArgs e)
-        {
-            order.Customer = customertxt.Text;
         }
 
         private void deletbtn_Click(object sender, EventArgs e)
@@ -76,15 +71,12 @@ namespace WindowsFormsApp1
                 if (selectID == null)
                     return;
                 int ID = (int)selectID;
-                for(int i = 0;i<order.itemList.Count;i++)
+                for (int i = 0; i < order.itemList.Count; i++)
                 {
                     if (order.itemList[i].ID == ID)
                         order.itemList.RemoveAt(i);
                 }
             }
-
-            dataGridView1.DataSource = new nlist<OrderItem>();
-            dataGridView1.DataSource = order.itemList;
         }
     }
 }

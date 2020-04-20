@@ -20,18 +20,38 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        OrderManagementSystem.OrderService service;
+        OrderManagementSystem.OrderService Service { set; get; }
+
+        public string Keyword { set; get; }
         public Form1()
         {
             InitializeComponent();
-            service = new OrderManagementSystem.OrderService();
-
-            dataGridView1.DataSource = service.orderList;
+            Service = new OrderManagementSystem.OrderService();
+            orderBindingSource.DataSource = Service.orderList;
+            textBox1.DataBindings.Add("Text", this, "Keyword");
         }
 
         private void querybtn_Click(object sender, EventArgs e)
         {
+            int queryID = -1;
+            try
+            {
+                queryID = Int32.Parse(Keyword);
 
+            }
+            catch(Exception)
+            {
+
+            }
+            finally
+            {
+                dataGridView1.DataSource = orderBindingSource;
+                orderBindingSource.DataSource = Service.orderList.Where(s => s.Customer == Keyword || s.ID == queryID);
+                if (Keyword == null||Keyword == "")
+                {
+                    orderBindingSource.DataSource = Service.orderList;
+                }
+            }
         }
         private void creatbtn_Click(object sender, EventArgs e)
         {
@@ -47,21 +67,49 @@ namespace WindowsFormsApp1
 
             if (DialogResult.OK == form.ShowDialog())
             {
-                service.addOrder(form.order);
+                Service.addOrder(form.order);
                 dataGridView1.DataSource = new mList<Order>();
-                dataGridView1.DataSource = service.orderList;
-                form.Dispose();
+                dataGridView1.DataSource = Service.orderList;
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
             }
         }
 
         private void deletebtn_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewCell cell in dataGridView1.SelectedCells)
+            {
+                dataGridView1.Rows[cell.RowIndex].Selected = true;
+            }
 
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                int? selectID = row.Cells[0].Value as int?;
+                if (selectID == null)
+                    return;
+                int ID = (int)selectID;
+                for (int i = 0; i < Service.orderList.Count; i++)
+                {
+                    if (Service.orderList[i].ID == ID)
+                        Service.orderList.RemoveAt(i);
+                }
+            }
+            dataGridView1.DataSource = new mList<Order>();
+            dataGridView1.DataSource = Service.orderList;
         }
 
         private void editbtn_Click(object sender, EventArgs e)
         {
-
+            foreach (DataGridViewCell cell in dataGridView1.SelectedCells)
+            {
+                dataGridView1.Rows[cell.RowIndex].Selected = true;
+            }
+            if (dataGridView1.SelectedRows.Count != 1)
+                return;
+            editForm form = new editForm(Service.orderList[dataGridView1.SelectedRows[0].Index]);
+            if (DialogResult.OK == form.ShowDialog())
+            {
+                
+            }
         }
 
         private void exportbtn_Click(object sender, EventArgs e)
@@ -71,7 +119,7 @@ namespace WindowsFormsApp1
             saveFile.Filter = "XML文件|*.xml";
             if (DialogResult.OK == saveFile.ShowDialog())
             {
-                service.Export(saveFile.FileName);
+                Service.Export(saveFile.FileName);
             }
         }
 
@@ -82,15 +130,17 @@ namespace WindowsFormsApp1
             openFile.Filter = "XML文件|*.xml";
             if(DialogResult.OK  == openFile.ShowDialog())
             {
-                service.Import(openFile.FileName);
+                Service.Import(openFile.FileName);
                 dataGridView1.DataSource = new mList<Order>();
-                dataGridView1.DataSource = service.orderList;
+                dataGridView1.DataSource = Service.orderList;
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            int clickedID = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+            Order clickedOrder = Service.searchOrder(clickedID);
+            itemListBindingSource.DataSource = clickedOrder.itemList;
         }
     }
 }
