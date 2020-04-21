@@ -13,13 +13,14 @@ namespace WindowsFormsApp1
 {
     public partial class editForm : Form
     {
-        Order order;
+        public Order order;
         OrderManagementSystem.OrderItem item;
 
         public editForm()
         {
             InitializeComponent();
             order = new Order();
+
             item = new OrderManagementSystem.OrderItem();
             goodsIDtxt.DataBindings.Add("Text", item, "ID");
             goodsPricetxt.DataBindings.Add("Text", item, "Price");
@@ -29,7 +30,8 @@ namespace WindowsFormsApp1
         public editForm(Order order):this()
         {
             this.order = order;
-            orderItemBindingSource.DataSource = order.itemList;
+            customertxt.Text = order.Customer;
+            dataGridView1.DataSource = order.itemList;
         }
 
         private void OKbtn_Click(object sender, EventArgs e)
@@ -56,6 +58,8 @@ namespace WindowsFormsApp1
                 }
             }
             order.itemList.Add(aitem);
+            dataGridView1.DataSource = new nlist<OrderItem>();
+            dataGridView1.DataSource = order.itemList;
         }
 
         private void deletbtn_Click(object sender, EventArgs e)
@@ -77,6 +81,8 @@ namespace WindowsFormsApp1
                         order.itemList.RemoveAt(i);
                 }
             }
+            dataGridView1.DataSource = new nlist<OrderItem>();
+            dataGridView1.DataSource = order.itemList;
         }
     }
 }

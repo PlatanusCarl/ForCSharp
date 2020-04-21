@@ -108,7 +108,7 @@ namespace WindowsFormsApp1
             editForm form = new editForm(Service.orderList[dataGridView1.SelectedRows[0].Index]);
             if (DialogResult.OK == form.ShowDialog())
             {
-
+                Service.orderList[dataGridView1.SelectedRows[0].Index] = form.order;
             }
         }
 
