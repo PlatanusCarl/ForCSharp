@@ -44,6 +44,7 @@ namespace CrawlerWinForm
 
         private void startbtn_Click(object sender, EventArgs e)
         {
+            urlStatus.Clear();
             string startUrl = urltxt.Text;
             crawler.Crawl(startUrl);
         }
