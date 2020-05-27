@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
             finally
             {
                 dataGridView1.DataSource = orderBindingSource;
-                orderBindingSource.DataSource = Service.orderList.Where(s => s.Customer == Keyword || s.ID == queryID);
+                orderBindingSource.DataSource = Service.orderList.Where(s => s.Customer == Keyword || s.OrderID == queryID);
                 if (Keyword == null||Keyword == "")
                 {
                     orderBindingSource.DataSource = Service.orderList;
@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
                 int ID = (int)selectID;
                 for (int i = 0; i < Service.orderList.Count; i++)
                 {
-                    if (Service.orderList[i].ID == ID)
+                    if (Service.orderList[i].OrderID == ID)
                         Service.orderList.RemoveAt(i);
                 }
             }
