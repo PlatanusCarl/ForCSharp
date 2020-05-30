@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OrderManagementSystemEF.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace OrderManagementSystemEF
 {
     static class Program
     {

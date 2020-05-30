@@ -75,18 +75,7 @@
 
             public int ID { set; get; }
             public String Customer { set; get; }
-            public int Total
-            {
-                get
-                {
-                    int sum = 0;
-                    foreach (OrderItem o in itemList)
-                    {
-                        sum += o.Total;
-                    }
-                    return sum;
-                }
-            }
+            public int Total =>itemList.Sum(item=>item.Total);
 
             public nlist<OrderItem> itemList { set; get; }
 
@@ -125,7 +114,7 @@
             {
                 return $"商品号：{ID}，商品价格：{Price}，商品数量：{Amount}";
             }
-            public bool Equals(Order obj)
+            public bool Equals(OrderItem obj)
             {
             if (obj.ID != this.ID)
                 return false;
